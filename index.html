@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản Lý Tài Chính Công - Menu Chính</title>
+    <title>Quản Lý Tài Chính Công - Danh Sách Chương</title>
     <style>
         :root {
             --primary-color: #2563eb;
@@ -35,7 +35,7 @@
 
         header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 60px;
             animation: fadeInDown 0.8s ease-out;
         }
 
@@ -54,9 +54,9 @@
         .grid-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+            gap: 30px;
             width: 100%;
-            max-width: 1200px;
+            max-width: 900px;
             animation: fadeInUp 0.8s ease-out 0.2s backwards;
         }
 
@@ -64,20 +64,23 @@
             background: var(--card-bg);
             border-radius: 16px;
             box-shadow: var(--card-shadow);
-            padding: 24px;
+            padding: 40px;
             text-decoration: none;
             color: inherit;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             border: 1px solid transparent;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 16px;
+            text-align: center;
+            gap: 20px;
             position: relative;
             overflow: hidden;
+            height: 100%;
         }
 
         .card:hover {
-            transform: translateY(-4px);
+            transform: translateY(-8px);
             box-shadow: var(--hover-shadow);
             border-color: var(--primary-color);
         }
@@ -87,58 +90,42 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 4px;
-            height: 100%;
+            width: 100%;
+            height: 6px;
             background: var(--primary-color);
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            opacity: 0.8;
         }
 
-        .card:hover::before {
-            opacity: 1;
-        }
-
-        .part-number {
+        .chapter-badge {
             background: var(--primary-color);
             color: white;
-            font-size: 1.2rem;
+            padding: 8px 16px;
+            border-radius: 20px;
             font-weight: bold;
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-shrink: 0;
-            box-shadow: 0 4px 6px rgba(37, 99, 235, 0.3);
-        }
-
-        .part-info {
-            flex-grow: 1;
-        }
-
-        .part-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #111827;
-            margin-bottom: 4px;
-        }
-
-        .part-desc {
             font-size: 0.9rem;
-            color: #6b7280;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .chapter-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #111827;
+            line-height: 1.4;
         }
 
         .arrow-icon {
-            opacity: 0;
-            transform: translateX(-10px);
-            transition: all 0.3s ease;
+            font-size: 1.5rem;
             color: var(--primary-color);
+            margin-top: auto;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
         }
 
         .card:hover .arrow-icon {
             opacity: 1;
-            transform: translateX(0);
+            transform: translateY(0);
         }
 
         @keyframes fadeInDown {
@@ -164,280 +151,36 @@
                 transform: translateY(0);
             }
         }
-
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 2rem;
-            }
-
-            .grid-container {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* CARD WRAPPER & INFOGRAPHIC BTN */
-        .card-wrapper {
-            display: flex;
-            gap: 12px;
-            align-items: stretch;
-        }
-
-        .infographic-btn {
-            width: 60px;
-            background: linear-gradient(135deg, #f97316, #ea580c);
-            border: none;
-            border-radius: 16px;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: var(--card-shadow);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .infographic-btn:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--hover-shadow);
-            filter: brightness(1.1);
-        }
-
-        .card {
-            flex-grow: 1;
-            /* Card takes remaining space */
-        }
-
-        /* INFOGRAPHIC MODAL */
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 999999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease;
-        }
-
-        .modal.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .modal img {
-            max-width: 95%;
-            max-height: 95%;
-            object-fit: contain;
-            border-radius: 8px;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-            transform: scale(0.9);
-            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        .modal.active img {
-            transform: scale(1);
-        }
-
-        .modal-close-btn {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            cursor: pointer;
-            backdrop-filter: blur(4px);
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.2s ease;
-        }
-
-        .modal-close-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: scale(1.05);
-        }
     </style>
 </head>
 
 <body>
 
     <header>
-        <h1>Mục Lục Bài Giảng</h1>
-        <p class="subtitle">1. Quản lý Tài chính công - 2024</p>
+        <h1>QUẢN LÝ TÀI CHÍNH CÔNG</h1>
+        <p class="subtitle">Năm 2024</p>
     </header>
 
     <div class="grid-container">
-        <!-- Phần 1 -->
-        <div class="card-wrapper">
-            <button class="infographic-btn" onclick="openInfographic(1)" title="Xem Infographic">ℹ️</button>
-            <a href="./Phần 1_Quản_lý_Tài_chính_công/index.html" class="card">
-                <div class="part-number">01</div>
-                <div class="part-info">
-                    <div class="part-title">Quản lý Tài chính công</div>
-                    <div class="part-desc">Giới thiệu tổng quan</div>
-                </div>
-                <div class="arrow-icon">➜</div>
-            </a>
-        </div>
+        <!-- Chương 1 -->
+        <a href="./Chương_1/index.html" class="card">
+            <span class="chapter-badge">Chương 1</span>
+            <div class="chapter-title">
+                TỔNG QUAN VỀ TÀI CHÍNH CÔNG VÀ QUẢN LÝ TÀI CHÍNH CÔNG
+            </div>
+            <div class="arrow-icon">➜</div>
+        </a>
 
-        <!-- Phần 2 -->
-        <div class="card-wrapper">
-            <button class="infographic-btn" onclick="openInfographic(2)" title="Xem Infographic">ℹ️</button>
-            <a href="./Phần 2_Tài_chính_công_Ba_chức_năng/index.html" class="card">
-                <div class="part-number">02</div>
-                <div class="part-info">
-                    <div class="part-title">Tài chính công</div>
-                    <div class="part-desc">Ba chức năng cốt lõi</div>
-                </div>
-                <div class="arrow-icon">➜</div>
-            </a>
-        </div>
-
-        <!-- Phần 3 -->
-        <div class="card-wrapper">
-            <button class="infographic-btn" onclick="openInfographic(3)" title="Xem Infographic">ℹ️</button>
-            <a href="./Phần 3_Tài_chính_công_Tổng_quan_Đặc_điểm/index.html" class="card">
-                <div class="part-number">03</div>
-                <div class="part-info">
-                    <div class="part-title">Tổng quan và Đặc điểm</div>
-                    <div class="part-desc">Tài chính công</div>
-                </div>
-                <div class="arrow-icon">➜</div>
-            </a>
-        </div>
-
-        <!-- Phần 4 -->
-        <div class="card-wrapper">
-            <button class="infographic-btn" onclick="openInfographic(4)" title="Xem Infographic">ℹ️</button>
-            <a href="./Phần 4_Public_Finance_Scope_And_System/index.html" class="card">
-                <div class="part-number">04</div>
-                <div class="part-info">
-                    <div class="part-title">Phạm vi và Hệ thống</div>
-                    <div class="part-desc">Public Finance Scope And System</div>
-                </div>
-                <div class="arrow-icon">➜</div>
-            </a>
-        </div>
-
-        <!-- Phần 5 -->
-        <div class="card-wrapper">
-            <button class="infographic-btn" onclick="openInfographic(5)" title="Xem Infographic">ℹ️</button>
-            <a href="./Phần 5_Vai_trò_của_Tài_chính_công/index.html" class="card">
-                <div class="part-number">05</div>
-                <div class="part-info">
-                    <div class="part-title">Vai trò của Tài chính công</div>
-                    <div class="part-desc">Các vai trò chính</div>
-                </div>
-                <div class="arrow-icon">➜</div>
-            </a>
-        </div>
-
-        <!-- Phần 6 -->
-        <div class="card-wrapper">
-            <button class="infographic-btn" onclick="openInfographic(6)" title="Xem Infographic">ℹ️</button>
-            <a href="./Phần 6_Khái_niệm_Quản_lý_Tài_chính_công/index.html" class="card">
-                <div class="part-number">06</div>
-                <div class="part-info">
-                    <div class="part-title">Khái niệm Quản lý</div>
-                    <div class="part-desc">Quản lý Tài chính công</div>
-                </div>
-                <div class="arrow-icon">➜</div>
-            </a>
-        </div>
-
-        <!-- Phần 7 -->
-        <div class="card-wrapper">
-            <button class="infographic-btn" onclick="openInfographic(7)" title="Xem Infographic">ℹ️</button>
-            <a href="./Phần 7_Đặc_điểm_Quản_lý_Tài_chính_công/index.html" class="card">
-                <div class="part-number">07</div>
-                <div class="part-info">
-                    <div class="part-title">Đặc điểm Quản lý</div>
-                    <div class="part-desc">Quản lý Tài chính công</div>
-                </div>
-                <div class="arrow-icon">➜</div>
-            </a>
-        </div>
-
-        <!-- Phần 8 -->
-        <div class="card-wrapper">
-            <button class="infographic-btn" onclick="openInfographic(8)" title="Xem Infographic">ℹ️</button>
-            <a href="./Phần 8_PFM_Revenue_Expenditure_Balance/index.html" class="card">
-                <div class="part-number">08</div>
-                <div class="part-info">
-                    <div class="part-title">Thu chi và Cân đối</div>
-                    <div class="part-desc">PFM Revenue Expenditure Balance</div>
-                </div>
-                <div class="arrow-icon">➜</div>
-            </a>
-        </div>
-
-        <!-- Phần 9 -->
-        <div class="card-wrapper">
-            <button class="infographic-btn" onclick="openInfographic(9)" title="Xem Infographic">ℹ️</button>
-            <a href="./Phần 9_Tổ_chức_Quản_lý_Tài_chính_công_Việt_Nam/index.html" class="card">
-                <div class="part-number">09</div>
-                <div class="part-info">
-                    <div class="part-title">Tổ chức Quản lý (VN)</div>
-                    <div class="part-desc">Tại Việt Nam</div>
-                </div>
-                <div class="arrow-icon">➜</div>
-            </a>
-        </div>
+        <!-- Chương 2 -->
+        <a href="./Chương_2/index.html" class="card">
+            <span class="chapter-badge">Chương 2</span>
+            <div class="chapter-title">
+                QUẢN LÝ NGÂN SÁCH NHÀ NƯỚC
+            </div>
+            <div class="arrow-icon">➜</div>
+        </a>
     </div>
 
-    <!-- Infographic Modal -->
-    <div id="infographic-modal" class="modal">
-        <button class="modal-close-btn" onclick="closeInfographic()">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M19 12H5M12 19l-7-7 7-7" />
-            </svg>
-            Menu
-        </button>
-        <img id="infographic-img" src="" alt="Infographic">
-    </div>
-
-    <script>
-        const modal = document.getElementById('infographic-modal');
-        const modalImg = document.getElementById('infographic-img');
-
-        function openInfographic(partNumber) {
-            // Path: Infographic/Phần_N.png
-            const src = `Infographic/Phần_${partNumber}.png`;
-            modalImg.src = src;
-            modal.classList.add('active');
-        }
-
-        function closeInfographic() {
-            modal.classList.remove('active');
-            setTimeout(() => {
-                modalImg.src = '';
-            }, 300);
-        }
-
-        // Close when clicking outside image
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                closeInfographic();
-            }
-        });
-
-        // Close on Escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && modal.classList.contains('active')) {
-                closeInfographic();
-            }
-        });
-    </script>
 </body>
 
 </html>
